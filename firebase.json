@@ -1,1 +1,17 @@
-{"hosting":{"site":"ca-613-flutter","public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"ca-613-flutter","configurations":{"web":"1:65894783052:web:92407a0ec0d3c8b7f2fce9"}}}}}}
+{
+    "hosting": {
+      "site": "ca-613-flutter",
+      "public": "build/web",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
