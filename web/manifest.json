@@ -1,11 +1,11 @@
 {
-    "name": "create_resolution_system_613",
-    "short_name": "create_resolution_system_613",
+    "name": "ca_613",
+    "short_name": "ca_613",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "CA System Cloned in Flutter by 613. Originally on Apps Script.",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -306,10 +306,58 @@ class ViewResolutionsPageState extends State<ViewResolutionsPage> {
     }
   }
 
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context)
+                    .pushReplacementNamed('/login'); // Navigate to login screen
+              },
+              child: const Text(
+                'Yes',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text(
+                'No',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(), // Use your custom app bar here
+      appBar: CustomAppBar(
+        onLogout: () => _showLogoutDialog(context),
+      ), // Use your custom app bar here
       backgroundColor: const Color(0xFFD0E4CC), // Set background color
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: fetchPdfData(),

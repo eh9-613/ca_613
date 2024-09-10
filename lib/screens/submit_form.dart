@@ -45,9 +45,9 @@ class SubmitFormPageState extends State<SubmitFormPage> {
   @override
   void initState() {
     super.initState();
-    _committeeNames =
-        fetchCommitteeNames();
-        gsheets = GSheets(dotenv.env['GOOGLE_CREDENTIALS']!); // Fetch committee members only once when the page initializes
+    _committeeNames = fetchCommitteeNames();
+    gsheets = GSheets(dotenv.env[
+        'GOOGLE_CREDENTIALS']!); // Fetch committee members only once when the page initializes
   }
 
   @override
@@ -169,14 +169,62 @@ class SubmitFormPageState extends State<SubmitFormPage> {
 
     final allCommitteeRows = await memberData.values.allRows(fromRow: 2);
     return allCommitteeRows.map<String>((row) {
-      return row[0]; // Adjust the index based on your column setup
+      return row.isNotEmpty ? row[0] : ''; // Ensure row is not empty
     }).toList();
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context)
+                    .pushReplacementNamed('/login'); // Navigate to login screen
+              },
+              child: const Text(
+                'Yes',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text(
+                'No',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(),
+        appBar: CustomAppBar(
+          onLogout: () => _showLogoutDialog(context),
+        ),
         backgroundColor: const Color(0xFFD0E4CC),
         body: Center(
           child: Container(

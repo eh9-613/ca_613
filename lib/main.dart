@@ -6,11 +6,18 @@ import 'package:create_resolution_system_613/screens/submit_form.dart';
 import 'package:create_resolution_system_613/screens/view_resolutions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
+  
+  // Initialize Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
