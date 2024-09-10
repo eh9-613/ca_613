@@ -83,8 +83,8 @@ class CreateLetter {
       print('Document copied successfully with ID: $documentId');
 
       final permission = drive.Permission();
-        permission.type = 'anyone';
-        permission.role = 'writer';
+      permission.type = 'anyone';
+      permission.role = 'writer';
 
       await driveApi.permissions.create(permission, documentId);
 
